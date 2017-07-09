@@ -1,4 +1,8 @@
 
+
+
+
+////////
 case class Cat(name:String, color:String, food:String)
 
 
@@ -18,7 +22,7 @@ object Director {
 
 
 
-class Film(
+case class Film(
             val name:String,
             val yearOfRelease:Int,
             val imdbRating:Double,
@@ -62,7 +66,6 @@ val thomasCrownAffair = new Film("The Thomas Crown Affair", 1999, 6.8, mcTiernan
 
 
 
-
 //////////////
 
 
@@ -85,3 +88,42 @@ class Adder(amount:Int) {
 val add3 = new Adder(3)
 add3(2)
 
+///// Pattern Matching
+case class Person(firstName:String, lastName:String)
+
+object Stormtrooper {
+  def inspect(person:Person):String =
+    person match {
+      case Person("Luke", "Skywalker") => "Stop, rebel scum!"
+      case Person("Han", "Solo") => "Stop, rebel scum!"
+      case Person(first, last) => s"Move along, $first"
+    }
+}
+
+Stormtrooper.inspect(Person("Noel", "Welsh"))
+Stormtrooper.inspect(Person("Han", "Solo"))
+
+//// exercise
+
+object ChipShop {
+  def willServe(cat:Cat):Boolean =
+    cat match {
+      case Cat(_, _, "Chips") => true
+      case Cat(_, _, _) => false
+    }
+}
+
+ChipShop.willServe(Cat("Tom", "Jerry", "Chips"))
+
+object Dad {
+  def rate(film:Film):Double =
+    film match {
+      case Film(_, _, _, Director("Clint", "Eastwood", _)) => 10.0
+      case Film(_, _, _, Director("John", "McTiernan", _)) => 7.0
+      case Film(_, _, _, _) => 3.0
+    }
+}
+
+Dad.rate(unforgiven)
+Dad.rate(predator)
+Dad.rate(memento)
