@@ -70,7 +70,7 @@ trait Visitor {
 object EmailService {
   def apply(visitor:Visitor) =
     visitor match {
-      case User(_,_,_) => "send email"
+      case User(_, _, _) => "send email"
       case _ => "cannot send email"
     }
 }
