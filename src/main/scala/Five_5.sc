@@ -40,11 +40,37 @@ object Five_5 {
   //// ex 5.5.4.1
   val list: LinkedList[Int] = Pair(1, Pair(2, Pair(3, End())))
 
-  list.map(_ * 2)
-  list.map(x => x * 3)
+//  list.map(_ * 2)
+//  list.map(x => x * 3)
+//
+//  list.map(_ + 1)
+//  list.map(_ / 3)
 
-  list.map(_ + 1)
-  list.map(_ / 3)
+
+  //// 5.5.4.3
+  val list2:List[Maybe[Int]] = List(Full(3), Full(2), Full(1))
+//  list2.map(maybe => maybe flatMap { x => if(x % 2 == 0) Full(x) else Empty()})
+
+
+  //// 5.5.4.4
+  sealed trait Sum[A, B] {
+    def map[C](fn: B => C): Sum[A, C] =
+      this match {
+        case Failure(a) => Failure(a)
+        case Success(b) => Success(fn(b))
+      }
+    def flatMap[C](fn: B => Sum[A, C]) =
+      this match {
+        case Failure(a) => Failure(a)
+        case Success(b) => fn(b)
+
+      }
+  }
+
+  final case class Failure[A, B](value:A) extends Sum[A, B]
+  final case class Success[A, B](value:B) extends Sum[A, B]
+
+  val list3 = List(Success(2), Success(4), Failure(6))
 
 
 
