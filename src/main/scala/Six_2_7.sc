@@ -19,7 +19,7 @@ object Six_2_7 {
 
   unique(Seq(1, 1, 2, 2, 3, 3, 4, 5, 5 ))
 
-  seq.foldLeft(1) { (a, b) => a * b}
+  seq.product
 
   // Reverse
   def reverse[A](seq: Seq[A]): Seq[A] =
