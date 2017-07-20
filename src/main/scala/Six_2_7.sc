@@ -2,7 +2,7 @@ object Six_2_7 {
   // 6.2.7.2 Do It Yourself
   // Minimum
   def minimum(seq: Seq[Int]): Int =
-  seq.foldLeft(Int.MaxValue)((a, b) => if (a < b) a else b)
+    seq.foldLeft(Int.MaxValue)((a, b) => if (a < b) a else b)
 
   val seq = Seq(34, 12, 45, 123, 34)
   minimum(seq)
